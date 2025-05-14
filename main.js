@@ -6,6 +6,9 @@ const HOST = '127.0.0.1';
 const PORT = 8000;
 const SERVER_URL = `http://${HOST}:${PORT}`;
 
+// Coloque aqui o caminho absoluto para o php.exe do XAMPP:
+const PHP_PATH = 'C:\\xampp\\php\\php.exe';
+
 let mainWindow;
 
 function createWindow() {
@@ -16,7 +19,8 @@ function createWindow() {
     base: path.join(__dirname, '../public'),
     keepalive: false,
     open: false,
-    bin: path.join(__dirname, 'php', process.platform === 'win32' ? 'php.exe' : 'php'),
+    // Use o PHP do XAMPP:
+    bin: PHP_PATH,
     router: path.join(__dirname, 'server.php'),
   });
 
@@ -27,13 +31,11 @@ function createWindow() {
     height,
     show: false,
     autoHideMenuBar: true,
-    webPreferences: {
-      contextIsolation: true,
-    },
+    webPreferences: { contextIsolation: true },
   });
 
-  // Carrega o Laravel via Inertia/Vite
-  mainWindow.loadURL(SERVER_URL); 
+  // Carrega sua aplicação Laravel/Inertia/React
+  mainWindow.loadURL(SERVER_URL);
 
   mainWindow.webContents.once('dom-ready', () => {
     mainWindow.show();
@@ -56,7 +58,5 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
-  }
+  if (mainWindow === null) createWindow();
 });
