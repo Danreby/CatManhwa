@@ -38,7 +38,7 @@
       "output": "dist_electron"
     },
     "files": [
-      "main.js",
+      "main.cjs",
       "preload.js",
       "public/**/*",
       "vendor/**/*"
