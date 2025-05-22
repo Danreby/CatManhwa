@@ -1,10 +1,17 @@
 {
   "private": true,
+<<<<<<< HEAD
   "name": "cat-manhwa",
   "version": "1.0.0",
   "description": "Um gerenciador de manhwas com Electron.",
   "author": "BR",
   "main": "main.js",
+=======
+
+  "type": "module",
+  "main": "main.cjs",
+
+>>>>>>> fe8f8cb815b501b8d5311509265cdb1821c542e2
   "scripts": {
     "dev": "vite",
     "serve": "php artisan serve",
@@ -21,6 +28,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@tailwindcss/postcss": "^4.1.6",
     "@tailwindcss/vite": "^4.1.6",
     "@vitejs/plugin-react": "^4.2.0",
@@ -31,6 +39,24 @@
     "laravel-vite-plugin": "^1.2.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.6",
+=======
+
+    "@headlessui/react": "^2.0.0",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/vite": "^4.0.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "autoprefixer": "^10.4.12",
+    "concurrently": "^9.1.2",
+    "electron": "^36.2.0",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2",
+    "laravel-vite-plugin": "^1.2.0",
+    "node-php-server": "^0.1.2",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.2.1",
+    "vite": "^6.2.4",
+
+>>>>>>> fe8f8cb815b501b8d5311509265cdb1821c542e2
     "wait-on": "^8.0.3"
   },
   "build": {
