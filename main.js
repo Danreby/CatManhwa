@@ -1,62 +1,23 @@
-const { app, BrowserWindow, screen } = require('electron');
-const path = require('path');
-const phpServer = require('node-php-server');
+import { app, BrowserWindow } from 'electron';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const HOST = '127.0.0.1';
-const PORT = 8000;
-const SERVER_URL = `http://${HOST}:${PORT}`;
-
-let mainWindow;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function createWindow() {
-  // Inicia o servidor PHP apontando para a pasta public do Laravel
-  phpServer.createServer({
-    port: PORT,
-    hostname: HOST,
-    base: path.join(__dirname, '../public'),
-    keepalive: false,
-    open: false,
-    bin: path.join(__dirname, 'php', process.platform === 'win32' ? 'php.exe' : 'php'),
-    router: path.join(__dirname, 'server.php'),
+  const win = new BrowserWindow({
+    width: 1024, height: 768,
+    webPreferences: { nodeIntegration: true, contextIsolation: false }
   });
 
-  // Cria a janela do Electron
-  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-  mainWindow = new BrowserWindow({
-    width,
-    height,
-    show: false,
-    autoHideMenuBar: true,
-    webPreferences: {
-      contextIsolation: true,
-    },
-  });
-
-  // Carrega o Laravel via Inertia/Vite
-  mainWindow.loadURL(SERVER_URL); 
-
-  mainWindow.webContents.once('dom-ready', () => {
-    mainWindow.show();
-    mainWindow.maximize();
-  });
-
-  mainWindow.on('closed', () => {
-    phpServer.close();
-    mainWindow = null;
-  });
+  if (process.env.NODE_ENV === 'development') {
+    win.loadURL('http://localhost:3000');
+  } else {
+    win.loadFile(path.join(__dirname, '../dist/index.html'));
+  }
 }
 
 app.whenReady().then(createWindow);
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    phpServer.close();
-    app.quit();
-  }
-});
-
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
-  }
-});
+app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit() });
+app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow() });
