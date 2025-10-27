@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "meu-app",
-    "slug": "meu-app",
+    "name": "teste",
+    "slug": "teste",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "meuapp",
+    "scheme": "teste",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
