@@ -23,6 +23,41 @@ export default function Home() {
               Aqui você pode adicionar cards, listas ou componentes do seu app.
             </Text>
           </View>
+                <View className="mt-6 w-full">
+            <Text className="text-sm text-gray-600">
+              Aqui você pode adicionar cards, listas ou componentes do seu app.
+            </Text>
+          </View>
+                <View className="mt-6 w-full">
+            <Text className="text-sm text-gray-600">
+              Aqui você pode adicionar cards, listas ou componentes do seu app.
+            </Text>
+          </View>
+                <View className="mt-6 w-full">
+            <Text className="text-sm text-gray-600">
+              Aqui você pode adicionar cards, listas ou componentes do seu app.
+            </Text>
+          </View>
+                <View className="mt-6 w-full">
+            <Text className="text-sm text-gray-600">
+              Aqui você pode adicionar cards, listas ou componentes do seu app.
+            </Text>
+          </View>
+                <View className="mt-6 w-full">
+            <Text className="text-sm text-gray-600">
+              Aqui você pode adicionar cards, listas ou componentes do seu app.
+            </Text>
+          </View>
+                <View className="mt-6 w-full">
+            <Text className="text-sm text-gray-600">
+              Aqui você pode adicionar cards, listas ou componentes do seu app.
+            </Text>
+          </View>
+                <View className="mt-6 w-full">
+            <Text className="text-sm text-gray-600">
+              Aqui você pode adicionar cards, listas ou componentes do seu app.
+            </Text>
+          </View>
         </View>
       </ScrollView>
 
