@@ -1,5 +1,7 @@
 import React from "react";
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import HomeIcon from "../common/icon/HomeIcon";
+import SearchIcon from "../common/icon/SearchIcon";
 
 type FooterProps = {
   onPress?: (key: "home" | "search" | "profile") => void;
@@ -16,7 +18,7 @@ const Footer: React.FC<FooterProps> = ({ onPress, className = "" }) => {
             className="flex-1 items-center py-2"
             accessibilityLabel="Ir para início"
           >
-            <Text className="text-sm">Início</Text>
+            <Text className="text-sm"><HomeIcon type={2}/></Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -24,7 +26,7 @@ const Footer: React.FC<FooterProps> = ({ onPress, className = "" }) => {
             className="flex-1 items-center py-2"
             accessibilityLabel="Pesquisar"
           >
-            <Text className="text-sm">Buscar</Text>
+            <Text className="text-sm"><SearchIcon type={1}/></Text>
           </TouchableOpacity>
 
           <TouchableOpacity
