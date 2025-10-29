@@ -2,6 +2,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "../common/button/ThemeContext";
+import { MoonIcon, SunIcon } from "../common/icon/ThemeIcon";
 
 type NavBarProps = {
   title?: string;
@@ -15,8 +16,7 @@ const NavBar: React.FC<NavBarProps> = ({ title = "App", showBack = false, onBack
 
   return (
     <View
-      // usando className se estiver com NativeWind; se não, troque para style condicional
-      className={`w-full flex-row items-center justify-between px-4 py-3 border-b ${
+      className={`w-full flex-row items-center justify-between mt-3 px-4 py-3 border-b ${
         theme === "dark" ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"
       }`}
     >
@@ -38,7 +38,7 @@ const NavBar: React.FC<NavBarProps> = ({ title = "App", showBack = false, onBack
           className="ml-3 px-3 py-1 rounded-md"
         >
           <Text className="text-base">
-            {theme === "dark" ? "☀️" /* sol para ativar claro */ : "🌙" /* lua para ativar escuro */}
+            {theme === "dark" ? <MoonIcon color="#ffffff"/> :  <SunIcon color="#000000"/>}
           </Text>
         </TouchableOpacity>
       </View>
