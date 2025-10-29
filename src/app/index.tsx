@@ -1,9 +1,10 @@
+import { ThemeProvider } from "../components/common/button/ThemeContext";
 import Home from "./pages/Home";
 
 export default function Index() {
   return (
-    <div>
+    <ThemeProvider>
       <Home />
-    </div>
+    </ThemeProvider>
   );
 }

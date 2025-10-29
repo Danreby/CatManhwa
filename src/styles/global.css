@@ -1,3 +1,96 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* --- PALETA: LIGHT MODE (padrão) --- */
+:root{
+  --color-bg: #f8fafc;         /* page background (light gray) */
+  --color-surface: #ffffff;    /* cards, surfaces */
+  --color-primary: #4f46e5;    /* indigo-600 */
+  --color-accent: #06b6d4;     /* cyan-500 */
+  --color-on-primary: #ffffff; /* text on primary */
+  --color-text: #0f172a;       /* slate-900 */
+  --color-muted: #6b7280;      /* gray-500 */
+  --color-border: #e6e7eb;     /* light border */
+  --color-success: #10b981;    /* green-500 */
+  --color-danger: #ef4444;     /* red-500 */
+
+  --scroll-thumb: rgba(79,70,229,0.95);
+  --scroll-track: rgba(0,0,0,0.04);
+}
+
+/* --- PALETA: DARK MODE --- */
+.dark {
+  --color-bg: #0b1220;
+  --color-surface: #0f1724;
+  --color-primary: #8b5cf6;
+  --color-accent: #06b6d4;
+  --color-on-primary: #0b1220;
+  --color-text: #e6eef8;
+  --color-muted: #94a3b8;
+  --color-border: #1f2937;
+  --color-success: #34d399;
+  --color-danger: #f87171;
+
+  /* dark scrollbar variants */
+  --scroll-thumb: rgba(139,92,246,0.92);
+  --scroll-track: rgba(255,255,255,0.03);
+}
+
+/* utilitários rápidos */
+.bg-app { background-color: var(--color-bg); }
+.surface { background-color: var(--color-surface); border-color: var(--color-border); }
+
+/* -------------------------
+   CUSTOM SCROLLBAR (global)
+   ------------------------- */
+
+/* base: Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) var(--scroll-track);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-color: var(--scroll-thumb);
+  min-height: 24px;
+  transition: background-color .15s, opacity .15s;
+}
+
+/* destaque ao passar o mouse */
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+}
+
+/* hover/active para Firefox*/
+.custom-scrollbar:hover {
+  scrollbar-color: var(--color-primary) var(--scroll-track);
+}
+
+/* Auto-hide */
+.custom-scrollbar--autohide::-webkit-scrollbar-thumb {
+  opacity: 0;
+  transition: opacity .18s;
+}
+.custom-scrollbar--autohide:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-scrollbar::-webkit-scrollbar-thumb { transition: none; }
+}
