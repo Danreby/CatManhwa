@@ -46,7 +46,7 @@ const NavBar: React.FC<NavBarProps> = ({ title = "App", showBack = false, onBack
           className="ml-3 px-3 py-1 rounded-md"
         >
           <Text className="text-base">
-            {theme === "dark" ? <MoonIcon color="#ffffff" /> : <SunIcon color="#000000" />}
+            {theme === "dark" ? <MoonIcon color="#ffffff" /> : <SunIcon color="#FFD700" />}
           </Text>
         </TouchableOpacity>
       </View>
