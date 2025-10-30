@@ -1,6 +1,7 @@
 // src/components/NavBar.tsx
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "../common/button/ThemeContext";
 import { MoonIcon, SunIcon } from "../common/icon/ThemeIcon";
 
@@ -13,10 +14,17 @@ type NavBarProps = {
 
 const NavBar: React.FC<NavBarProps> = ({ title = "App", showBack = false, onBack, right }) => {
   const { theme, toggleTheme } = useTheme();
+  const insets = useSafeAreaInsets();
+
+  const androidStatusBarHeight = Platform.OS === "android" ? StatusBar.currentHeight ?? 0 : 0;
+  const topInset = Math.max(insets.top, androidStatusBarHeight);
+
+  const paddingTop = topInset + 1;
 
   return (
     <View
-      className={`w-full flex-row items-center justify-between mt-3 px-4 py-3 border-b ${
+      style={[styles.container, { paddingTop }]}
+      className={`w-full flex-row items-center justify-between px-4 py-3 border-b ${
         theme === "dark" ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"
       }`}
     >
@@ -38,12 +46,18 @@ const NavBar: React.FC<NavBarProps> = ({ title = "App", showBack = false, onBack
           className="ml-3 px-3 py-1 rounded-md"
         >
           <Text className="text-base">
-            {theme === "dark" ? <MoonIcon color="#ffffff"/> :  <SunIcon color="#000000"/>}
+            {theme === "dark" ? <MoonIcon color="#ffffff" /> : <SunIcon color="#000000" />}
           </Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    zIndex: 10,
+  },
+});
 
 export default NavBar;
