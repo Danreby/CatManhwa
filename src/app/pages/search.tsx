@@ -1,5 +1,6 @@
 import { useTheme } from "@/src/components/common/button/ThemeContext";
 import MangaCard from "@/src/components/common/MangaCard";
+import SearchBar from "@/src/components/common/SearchBar";
 import Footer from "@/src/components/system/Footer";
 import { footerSpacing } from "@/src/components/system/layout";
 import NavBar from "@/src/components/system/NavBar";
@@ -8,36 +9,35 @@ import React from "react";
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function Profile(): JSX.Element {
+export default function Search(): JSX.Element {
   const { theme } = useTheme();
   const insets = useSafeAreaInsets();
   const paddingBottomValue = footerSpacing(insets);
 
   const { mangas, toggleRead } = useMangaStore();
+  const [query, setQuery] = React.useState("");
 
-  const read = mangas.filter((m) => m.isRead);
+  const filtered = mangas.filter((m) => {
+    if (!query) return true;
+    return (
+      m.title.toLowerCase().includes(query.toLowerCase()) || (m.author || "").toLowerCase().includes(query.toLowerCase())
+    );
+  });
 
   const handleFooterPress = () => {};
 
   return (
     <SafeAreaView className={`flex-1 ${theme === "dark" ? "bg-gray-900" : "bg-white"}`}>
-      <NavBar title="Perfil" subtitle={`${read.length} lidos`} />
+      <NavBar title="Pesquisar" />
 
       <ScrollView contentContainerStyle={{ paddingBottom: paddingBottomValue }} showsVerticalScrollIndicator={false}>
         <View className="px-4 py-4">
-          <View className="items-center">
-            <View className="w-24 h-24 rounded-full bg-gray-300 items-center justify-center">
-              <Text className="text-xl font-bold">U</Text>
-            </View>
+          <SearchBar value={query} onChangeText={setQuery} placeholder="Pesquisar mangás ou autores" />
 
-            <Text className={`text-lg font-semibold mt-3 ${theme === "dark" ? "text-white" : "text-black"}`}>Usuário Exemplo</Text>
-            <Text className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>user@example.com</Text>
-          </View>
-
-          <Text className={`text-lg font-semibold mt-6 ${theme === "dark" ? "text-white" : "text-black"}`}>Meus mangás lidos</Text>
+          <Text className={`text-lg font-semibold mt-6 ${theme === "dark" ? "text-white" : "text-black"}`}>Resultados</Text>
 
           <View className="mt-3">
-            {read.map((m) => (
+            {filtered.map((m) => (
               <MangaCard
                 key={m.id}
                 id={m.id}
