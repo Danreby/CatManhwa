@@ -8,8 +8,8 @@ import SearchBar from "@/src/components/common/SearchBar";
 import Footer from "@/src/components/system/Footer";
 import { footerSpacing } from "@/src/components/system/layout";
 import NavBar from "@/src/components/system/NavBar";
-import { useTheme } from "../../components/common/button/ThemeContext";
 import { useMangaStore } from "@/src/hooks/useMangaStore";
+import { useTheme } from "../../components/common/button/ThemeContext";
 
 type FooterKey = "home" | "search" | "profile";
 
@@ -33,26 +33,21 @@ type Manga = {
   isRead?: boolean;
 };
 
-const SAMPLE_MANGAS: Manga[] = Array.from({ length: 12 }).map((_, i) => ({
-  id: String(i + 1),
-// Removed SAMPLE_MANGAS as we will use useMangaStore to manage mangas
+
+export default function Home(): JSX.Element {
   const { theme } = useTheme();
   const insets = useSafeAreaInsets();
 
   const [query, setQuery] = React.useState("");
   const [selectedGenre, setSelectedGenre] = React.useState<string | null>(null);
   const [filter, setFilter] = React.useState<"all" | "read" | "unread">("all");
-  const [mangas, setMangas] = React.useState<Manga[]>(SAMPLE_MANGAS);
 
   const { mangas, toggleRead, loading } = useMangaStore();
+
   const paddingBottomValue = footerSpacing(insets);
 
   const handleFooterPress = (key: FooterKey): void => {
     console.log("Footer press:", key);
-  };
-
-  const toggleRead = (id: string) => {
-    setMangas((prev) => prev.map((m) => (m.id === id ? { ...m, isRead: !m.isRead } : m)));
   };
 
   const filtered = mangas.filter((m) => {
@@ -86,10 +81,10 @@ const SAMPLE_MANGAS: Manga[] = Array.from({ length: 12 }).map((_, i) => ({
           </View>
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-4">
-            const [query, setQuery] = React.useState("");
-            const [selectedGenre, setSelectedGenre] = React.useState<string | null>(null);
-            const [filter, setFilter] = React.useState<"all" | "read" | "unread">("all");
-            const { mangas, toggleRead, loading } = useMangaStore();
+            <TouchableOpacity onPress={() => setSelectedGenre(null)} className={`mr-3 px-4 py-2 rounded-full ${selectedGenre === null ? "bg-blue-500" : theme === "dark" ? "bg-gray-800" : "bg-gray-100"}`}>
+              <Text className={`text-sm ${selectedGenre === null ? "text-white" : theme === "dark" ? "text-white" : "text-black"}`}>Todos</Text>
+            </TouchableOpacity>
+            {GENRES.map((g) => (
               <CategoryPill key={g} title={g} active={g === selectedGenre} onPress={() => setSelectedGenre(g === selectedGenre ? null : g)} />
             ))}
           </ScrollView>
@@ -97,21 +92,28 @@ const SAMPLE_MANGAS: Manga[] = Array.from({ length: 12 }).map((_, i) => ({
           <Text className={`text-lg font-semibold mt-6 ${theme === "dark" ? "text-white" : "text-black"}`}>
             Meus mangás
           </Text>
-            // toggleRead provided by useMangaStore
-            {filtered.map((m) => (
-              <MangaCard
-                key={m.id}
-                id={m.id}
-                title={m.title}
-                author={m.author}
-                chaptersRead={m.chaptersRead}
-                totalChapters={m.totalChapters}
-                genres={m.genres}
-                coverUri={m.coverUri}
-                isRead={m.isRead}
-                onToggleRead={toggleRead}
-              />
-            ))}
+
+          <View className="mt-3">
+            {loading ? (
+              <Text className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>Carregando...</Text>
+            ) : filtered.length === 0 ? (
+              <Text className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>Nenhum mangá encontrado</Text>
+            ) : (
+              filtered.map((m) => (
+                <MangaCard
+                  key={m.id}
+                  id={m.id}
+                  title={m.title}
+                  author={m.author}
+                  chaptersRead={m.chaptersRead}
+                  totalChapters={m.totalChapters}
+                  genres={m.genres}
+                  coverUri={m.coverUri}
+                  isRead={m.isRead}
+                  onToggleRead={toggleRead}
+                />
+              ))
+            )}
           </View>
         </View>
       </ScrollView>

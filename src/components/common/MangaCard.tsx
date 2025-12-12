@@ -46,7 +46,7 @@ const MangaCard: React.FC<Props> = ({
             <Text className="text-sm mr-3">Capítulos: {chaptersRead}/{totalChapters}</Text>
           ) : null}
 
-          {genres && genres.length ? (
+          {Array.isArray(genres) && genres.length ? (
             <Text className="text-sm text-gray-500">{genres.slice(0, 2).join(", ")}</Text>
           ) : null}
         </View>
