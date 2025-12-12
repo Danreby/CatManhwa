@@ -57,7 +57,7 @@ const Footer: React.FC<FooterProps> = ({ onPress, className = "" }) => {
             try {
               onPress?.("search");
             } finally {
-              router.replace("/search");
+              router.replace("/pages/search");
             }
           }}
           className="flex-1 items-center py-2"
@@ -71,7 +71,7 @@ const Footer: React.FC<FooterProps> = ({ onPress, className = "" }) => {
             try {
               onPress?.("profile");
             } finally {
-              router.replace("/profile");
+              router.replace("/pages/Profile");
             }
           }}
           className="flex-1 items-center py-2"
