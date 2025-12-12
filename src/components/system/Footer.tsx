@@ -40,8 +40,11 @@ const Footer: React.FC<FooterProps> = ({ onPress, className = "" }) => {
       <View className="flex-row justify-around items-center py-3">
         <TouchableOpacity
           onPress={() => {
-            if (onPress) return onPress("home");
-            router.replace("/");
+            try {
+              onPress?.("home");
+            } finally {
+              router.replace("/");
+            }
           }}
           className="flex-1 items-center py-2"
           accessibilityLabel="Ir para início"
@@ -51,8 +54,11 @@ const Footer: React.FC<FooterProps> = ({ onPress, className = "" }) => {
 
         <TouchableOpacity
           onPress={() => {
-            if (onPress) return onPress("search");
-            router.replace("/search");
+            try {
+              onPress?.("search");
+            } finally {
+              router.replace("/search");
+            }
           }}
           className="flex-1 items-center py-2"
           accessibilityLabel="Pesquisar"
@@ -62,8 +68,11 @@ const Footer: React.FC<FooterProps> = ({ onPress, className = "" }) => {
 
         <TouchableOpacity
           onPress={() => {
-            if (onPress) return onPress("profile");
-            router.replace("/profile");
+            try {
+              onPress?.("profile");
+            } finally {
+              router.replace("/profile");
+            }
           }}
           className="flex-1 items-center py-2"
           accessibilityLabel="Perfil"
